@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_pageitems_collections",
+  "info": {
+    "displayName": "collection",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "subtitle": {
+      "type": "string",
+      "required": true
+    },
+    "images": {
+      "displayName": "image",
+      "type": "component",
+      "repeatable": true,
+      "component": "subitems.image",
+      "required": true
+    }
+  }
+}

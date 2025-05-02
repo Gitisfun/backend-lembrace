@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_subitems_images",
+  "info": {
+    "displayName": "images",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "order": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    },
+    "src": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}
