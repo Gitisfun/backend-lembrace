@@ -29,9 +29,6 @@
         "images"
       ]
     },
-    "description": {
-      "type": "text"
-    },
     "slug": {
       "type": "uid",
       "targetField": "name"
@@ -68,10 +65,7 @@
       "target": "api::subcategory.subcategory",
       "inversedBy": "products"
     },
-    "beschrijving": {
-      "type": "richtext"
-    },
-    "content": {
+    "description_detailed": {
       "type": "blocks"
     }
   }

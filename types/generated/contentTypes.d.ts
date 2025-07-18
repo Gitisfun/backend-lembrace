@@ -485,12 +485,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         number
       > &
       Schema.Attribute.DefaultTo<0>;
-    beschrijving: Schema.Attribute.RichText;
-    content: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description_detailed: Schema.Attribute.Blocks;
     discount: Schema.Attribute.Decimal &
       Schema.Attribute.SetMinMax<
         {
