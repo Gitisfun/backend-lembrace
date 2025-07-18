@@ -15,7 +15,7 @@
     "label": {
       "type": "string",
       "required": true,
-      "unique": true
+      "unique": false
     },
     "category": {
       "type": "relation",
@@ -27,6 +27,11 @@
       "relation": "oneToMany",
       "target": "api::product.product",
       "mappedBy": "subcategory"
+    },
+    "unique_field": {
+      "type": "string",
+      "unique": true,
+      "required": true
     }
   }
 }
