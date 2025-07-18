@@ -6,10 +6,6 @@
   },
   "options": {},
   "attributes": {
-    "subtitle": {
-      "type": "string",
-      "required": true
-    },
     "images": {
       "displayName": "image",
       "type": "component",

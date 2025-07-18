@@ -23,7 +23,7 @@
     },
     "image": {
       "type": "media",
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "allowedTypes": [
         "images"
@@ -48,17 +48,31 @@
       "default": 0,
       "max": 99
     },
-    "category": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::category.category",
-      "inversedBy": "products"
-    },
     "materials": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::material.material",
       "inversedBy": "products"
+    },
+    "image_background": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "subcategory": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subcategory.subcategory",
+      "inversedBy": "products"
+    },
+    "beschrijving": {
+      "type": "richtext"
+    },
+    "content": {
+      "type": "blocks"
     }
   }
 }

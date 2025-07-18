@@ -9,7 +9,6 @@ export interface PageitemsCollection extends Struct.ComponentSchema {
   attributes: {
     images: Schema.Attribute.Component<'subitems.image', true> &
       Schema.Attribute.Required;
-    subtitle: Schema.Attribute.String & Schema.Attribute.Required;
   };
 }
 
