@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_customer_info_addresses",
+  "info": {
+    "displayName": "Address",
+    "icon": "house"
+  },
+  "options": {},
+  "attributes": {
+    "street": {
+      "type": "string"
+    },
+    "number": {
+      "type": "string"
+    },
+    "box": {
+      "type": "string"
+    },
+    "postalcode": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    }
+  }
+}

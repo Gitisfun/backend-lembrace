@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_customer_info_order_items",
+  "info": {
+    "displayName": "order-item",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "productId": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "name": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "integer",
+      "min": 1,
+      "required": false
+    },
+    "discount": {
+      "type": "decimal"
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "calculatedPrice": {
+      "type": "decimal"
+    }
+  }
+}

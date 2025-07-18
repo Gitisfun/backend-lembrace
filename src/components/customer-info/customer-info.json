@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_customer_info_customer_infos",
+  "info": {
+    "displayName": "Customer-info",
+    "icon": "emotionHappy"
+  },
+  "options": {},
+  "attributes": {
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    }
+  }
+}
