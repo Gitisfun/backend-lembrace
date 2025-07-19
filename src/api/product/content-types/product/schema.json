@@ -45,12 +45,6 @@
       "default": 0,
       "max": 99
     },
-    "materials": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::material.material",
-      "inversedBy": "products"
-    },
     "image_background": {
       "type": "media",
       "multiple": false,
