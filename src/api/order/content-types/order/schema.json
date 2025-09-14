@@ -53,6 +53,10 @@
       "type": "string",
       "required": false,
       "unique": false
+    },
+    "unique_order_number": {
+      "type": "uid",
+      "required": true
     }
   }
 }

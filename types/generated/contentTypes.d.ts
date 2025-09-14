@@ -470,6 +470,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     shippingCost: Schema.Attribute.Decimal;
     totalPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    unique_order_number: Schema.Attribute.UID & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

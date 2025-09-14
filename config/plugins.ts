@@ -14,4 +14,21 @@ export default ({ env }) => ({
       },
     },
   },
+  email: {
+    config: {
+      provider: 'nodemailer',
+      providerOptions: {
+        host: 'smtp-auth.mailprotect.be',
+        port: 465,
+        auth: {
+          user: 'info@lembrace.be',
+          pass: 'L@embrace2012',
+        },
+      },
+      settings: {
+        defaultFrom: 'info@lembrace.be',
+        defaultReplyTo: 'info@lembrace.be',
+      },
+    },
+  },
 });
