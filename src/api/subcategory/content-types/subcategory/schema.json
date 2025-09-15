@@ -32,6 +32,9 @@
       "type": "string",
       "unique": true,
       "required": true
+    },
+    "display_label": {
+      "type": "string"
     }
   }
 }
