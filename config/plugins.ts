@@ -18,17 +18,16 @@ export default ({ env }) => ({
     config: {
       provider: 'nodemailer',
       providerOptions: {
-        host: env('SMTP_HOST', 'smtp-auth.mailprotect.be'),
-        port: env.int('SMTP_PORT', 993),
-        secure: true, // Required for port 465 (SSL)
+        host: 'smtp-auth.mailprotect.be',
+        port: 465,
         auth: {
-          user: env('SMTP_USERNAME'),
-          pass: env('SMTP_PASSWORD'),
+          user: 'info@lembrace.be',
+          pass: 'L@embrace2012',
         },
       },
       settings: {
-        defaultFrom: env('SMTP_DEFAULT_FROM', 'info@lembrace.be'),
-        defaultReplyTo: env('SMTP_DEFAULT_REPLY_TO', 'info@lembrace.be'),
+        defaultFrom: 'info@lembrace.be',
+        defaultReplyTo: 'info@lembrace.be',
       },
     },
   },
