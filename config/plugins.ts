@@ -19,7 +19,7 @@ export default ({ env }) => ({
       provider: 'nodemailer',
       providerOptions: {
         host: env('SMTP_HOST', 'smtp-auth.mailprotect.be'),
-        port: env.int('SMTP_PORT', 465),
+        port: env.int('SMTP_PORT', 993),
         secure: true, // Required for port 465 (SSL)
         auth: {
           user: env('SMTP_USERNAME'),
