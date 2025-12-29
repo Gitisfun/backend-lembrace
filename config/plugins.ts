@@ -16,14 +16,9 @@ export default ({ env }) => ({
   },
   email: {
     config: {
-      provider: 'nodemailer',
+      provider: 'sendgrid',
       providerOptions: {
-        host: 'smtp-auth.mailprotect.be',
-        port: 465,
-        auth: {
-          user: 'info@lembrace.be',
-          pass: 'L@embrace2012',
-        },
+        apiKey: env('SENDGRID_API_KEY'),
       },
       settings: {
         defaultFrom: 'info@lembrace.be',
