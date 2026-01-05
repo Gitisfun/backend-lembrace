@@ -404,6 +404,39 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDeliveryOptionDeliveryOption
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'delivery_options';
+  info: {
+    description: '';
+    displayName: 'Delivery Options';
+    pluralName: 'delivery-options';
+    singularName: 'delivery-option';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    isDefault: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::delivery-option.delivery-option'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    price: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   collectionName: 'homepages';
   info: {
@@ -434,6 +467,40 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiMaterialMaterial extends Struct.CollectionTypeSchema {
+  collectionName: 'materials';
+  info: {
+    description: '';
+    displayName: 'Materials';
+    pluralName: 'materials';
+    singularName: 'material';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::material.material'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
@@ -446,11 +513,12 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address: Schema.Attribute.Component<'customer-info.address', false> &
+    billingAddress: Schema.Attribute.Component<'customer-info.address', false> &
       Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    customerId: Schema.Attribute.String;
     customerInfo: Schema.Attribute.Component<
       'customer-info.customer-info',
       false
@@ -461,6 +529,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
+    orderDate: Schema.Attribute.DateTime;
     orderNumber: Schema.Attribute.String;
     orderStatus: Schema.Attribute.Enumeration<
       ['pending', 'paid', 'shipped', 'cancelled', 'received']
@@ -468,6 +537,11 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'pending'>;
     publishedAt: Schema.Attribute.DateTime;
+    shippingAddress: Schema.Attribute.Component<
+      'customer-info.address',
+      false
+    > &
+      Schema.Attribute.Required;
     shippingCost: Schema.Attribute.Decimal;
     totalPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
     unique_order_number: Schema.Attribute.UID & Schema.Attribute.Required;
@@ -519,6 +593,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'api::product.product'
     > &
       Schema.Attribute.Private;
+    materials: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::material.material'
+    >;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal &
       Schema.Attribute.Required &
@@ -1085,7 +1163,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
+      'api::delivery-option.delivery-option': ApiDeliveryOptionDeliveryOption;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::material.material': ApiMaterialMaterial;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::subcategory.subcategory': ApiSubcategorySubcategory;

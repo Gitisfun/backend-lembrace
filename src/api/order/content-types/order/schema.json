@@ -12,6 +12,15 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "orderNumber": {
+      "type": "string",
+      "required": false,
+      "unique": false
+    },
+    "unique_order_number": {
+      "type": "uid",
+      "required": true
+    },
     "orderStatus": {
       "type": "enumeration",
       "enum": [
@@ -24,6 +33,9 @@
       "default": "pending",
       "required": true
     },
+    "orderDate": {
+      "type": "datetime"
+    },
     "totalPrice": {
       "type": "decimal",
       "required": true
@@ -31,11 +43,8 @@
     "shippingCost": {
       "type": "decimal"
     },
-    "items": {
-      "type": "component",
-      "repeatable": true,
-      "component": "customer-info.order-item",
-      "required": true
+    "customerId": {
+      "type": "string"
     },
     "customerInfo": {
       "type": "component",
@@ -43,19 +52,22 @@
       "component": "customer-info.customer-info",
       "required": true
     },
-    "address": {
+    "shippingAddress": {
       "type": "component",
       "repeatable": false,
       "component": "customer-info.address",
       "required": true
     },
-    "orderNumber": {
-      "type": "string",
-      "required": false,
-      "unique": false
+    "billingAddress": {
+      "type": "component",
+      "repeatable": false,
+      "component": "customer-info.address",
+      "required": true
     },
-    "unique_order_number": {
-      "type": "uid",
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "customer-info.order-item",
       "required": true
     }
   }

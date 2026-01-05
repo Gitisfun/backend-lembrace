@@ -61,6 +61,12 @@
     },
     "description_detailed": {
       "type": "blocks"
+    },
+    "materials": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::material.material",
+      "inversedBy": "products"
     }
   }
 }

@@ -19,14 +19,18 @@
       "min": 1,
       "required": false
     },
-    "discount": {
+    "price": {
       "type": "decimal"
     },
-    "price": {
+    "discount": {
       "type": "decimal"
     },
     "calculatedPrice": {
       "type": "decimal"
+    },
+    "materialName": {
+      "type": "string",
+      "default": "-"
     }
   }
 }

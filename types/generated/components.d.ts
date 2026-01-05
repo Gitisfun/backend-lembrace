@@ -46,6 +46,7 @@ export interface CustomerInfoOrderItem extends Struct.ComponentSchema {
       >;
     calculatedPrice: Schema.Attribute.Decimal;
     discount: Schema.Attribute.Decimal;
+    materialName: Schema.Attribute.String & Schema.Attribute.DefaultTo<'-'>;
     name: Schema.Attribute.String;
     price: Schema.Attribute.Decimal;
     productId: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;

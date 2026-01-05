@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "delivery_options",
+  "info": {
+    "singularName": "delivery-option",
+    "pluralName": "delivery-options",
+    "displayName": "Delivery Options",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "isDefault": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
+
