@@ -501,6 +501,61 @@ export interface ApiMaterialMaterial extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiOrderStatusLogOrderStatusLog
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'order_status_logs';
+  info: {
+    description: 'Tracks every order status change';
+    displayName: 'Order Status Log';
+    pluralName: 'order-status-logs';
+    singularName: 'order-status-log';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    changedBy: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    currentStatus: Schema.Attribute.Enumeration<
+      [
+        'pending',
+        'paid',
+        'processing',
+        'shipped',
+        'delivered',
+        'cancelled',
+        'refunded',
+      ]
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::order-status-log.order-status-log'
+    > &
+      Schema.Attribute.Private;
+    note: Schema.Attribute.Text;
+    order: Schema.Attribute.Relation<'manyToOne', 'api::order.order'>;
+    previousStatus: Schema.Attribute.Enumeration<
+      [
+        'pending',
+        'paid',
+        'processing',
+        'shipped',
+        'delivered',
+        'cancelled',
+        'refunded',
+      ]
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   collectionName: 'orders';
   info: {
@@ -532,7 +587,15 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     orderDate: Schema.Attribute.DateTime;
     orderNumber: Schema.Attribute.String;
     orderStatus: Schema.Attribute.Enumeration<
-      ['pending', 'paid', 'shipped', 'cancelled', 'received']
+      [
+        'pending',
+        'paid',
+        'processing',
+        'shipped',
+        'delivered',
+        'cancelled',
+        'refunded',
+      ]
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'pending'>;
@@ -543,6 +606,10 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required;
     shippingCost: Schema.Attribute.Decimal;
+    statusLogs: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::order-status-log.order-status-log'
+    >;
     totalPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
     unique_order_number: Schema.Attribute.UID & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -1166,6 +1233,7 @@ declare module '@strapi/strapi' {
       'api::delivery-option.delivery-option': ApiDeliveryOptionDeliveryOption;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::material.material': ApiMaterialMaterial;
+      'api::order-status-log.order-status-log': ApiOrderStatusLogOrderStatusLog;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::subcategory.subcategory': ApiSubcategorySubcategory;

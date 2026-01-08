@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_status_logs",
+  "info": {
+    "singularName": "order-status-log",
+    "pluralName": "order-status-logs",
+    "displayName": "Order Status Log",
+    "description": "Tracks every order status change"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order.order",
+      "inversedBy": "statusLogs"
+    },
+    "currentStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "paid", "processing", "shipped", "delivered", "cancelled", "refunded"],
+      "required": true
+    },
+    "previousStatus": {
+      "type": "enumeration",
+      "enum": ["pending", "paid", "processing", "shipped", "delivered", "cancelled", "refunded"]
+    },
+    "changedBy": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    }
+  }
+}
+
