@@ -7,6 +7,37 @@ export default {
     }
   },
 
+  async afterCreate(event) {
+    const { result } = event;
+
+    // Only decrease stock when the order is published (prevents double execution with draftAndPublish)
+    if (!result.publishedAt) return;
+
+    await strapi.db.transaction(async ({ trx }) => {
+      // Fetch the full order with populated items
+      const order = await strapi.documents('api::order.order').findOne({
+        documentId: result.documentId,
+        populate: {
+          items: {
+            populate: ['productId'],
+          },
+        },
+      });
+
+      if (!order?.items?.length) return;
+
+      for (const item of order.items) {
+        const product = item.productId;
+        if (!product?.documentId) continue;
+
+        const quantityOrdered = item.amount || 1;
+
+        // Use raw query with transaction for atomic update
+        await strapi.db.connection('products').where('document_id', product.documentId).decrement('amount', quantityOrdered).transacting(trx);
+      }
+    });
+  },
+
   async beforeUpdate(event) {
     const { where } = event.params;
 
