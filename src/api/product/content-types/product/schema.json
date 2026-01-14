@@ -10,16 +10,30 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "price": {
       "type": "decimal",
-      "required": true,
-      "min": 0.01
+      "required": false,
+      "min": 0.01,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "image": {
       "type": "media",
@@ -27,7 +41,12 @@
       "required": true,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "slug": {
       "type": "uid",
@@ -37,13 +56,23 @@
       "type": "integer",
       "default": 0,
       "min": 0,
-      "required": true
+      "required": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "discount": {
       "type": "decimal",
       "min": 0,
       "default": 0,
-      "max": 99
+      "max": 99,
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "image_background": {
       "type": "media",
@@ -51,7 +80,12 @@
       "required": false,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
     },
     "subcategory": {
       "type": "relation",
@@ -60,7 +94,12 @@
       "inversedBy": "products"
     },
     "description_detailed": {
-      "type": "blocks"
+      "type": "blocks",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "materials": {
       "type": "relation",

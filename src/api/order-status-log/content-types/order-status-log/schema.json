@@ -20,12 +20,28 @@
     },
     "currentStatus": {
       "type": "enumeration",
-      "enum": ["pending", "paid", "processing", "shipped", "delivered", "cancelled", "refunded"],
+      "enum": [
+        "pending",
+        "paid",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "refunded"
+      ],
       "required": true
     },
     "previousStatus": {
       "type": "enumeration",
-      "enum": ["pending", "paid", "processing", "shipped", "delivered", "cancelled", "refunded"]
+      "enum": [
+        "pending",
+        "paid",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+        "refunded"
+      ]
     },
     "changedBy": {
       "type": "string"
@@ -35,4 +51,3 @@
     }
   }
 }
-
