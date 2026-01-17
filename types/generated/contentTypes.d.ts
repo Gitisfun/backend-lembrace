@@ -640,6 +640,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     items: Schema.Attribute.Component<'customer-info.order-item', true> &
       Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localeCustomer: Schema.Attribute.String & Schema.Attribute.DefaultTo<'en'>;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
     orderDate: Schema.Attribute.DateTime;

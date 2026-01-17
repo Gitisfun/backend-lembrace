@@ -77,6 +77,10 @@
       "relation": "oneToMany",
       "target": "api::order-status-log.order-status-log",
       "mappedBy": "order"
+    },
+    "localeCustomer": {
+      "type": "string",
+      "default": "en"
     }
   }
 }
