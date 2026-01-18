@@ -26,6 +26,8 @@
       "enum": [
         "pending",
         "paid",
+        "failed",
+        "expired",
         "processing",
         "shipped",
         "delivered",
@@ -81,6 +83,9 @@
     "localeCustomer": {
       "type": "string",
       "default": "en"
+    },
+    "molliePaymentId": {
+      "type": "string"
     }
   }
 }

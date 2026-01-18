@@ -643,12 +643,15 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     localeCustomer: Schema.Attribute.String & Schema.Attribute.DefaultTo<'en'>;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
+    molliePaymentId: Schema.Attribute.String;
     orderDate: Schema.Attribute.DateTime;
     orderNumber: Schema.Attribute.String;
     orderStatus: Schema.Attribute.Enumeration<
       [
         'pending',
         'paid',
+        'failed',
+        'expired',
         'processing',
         'shipped',
         'delivered',
