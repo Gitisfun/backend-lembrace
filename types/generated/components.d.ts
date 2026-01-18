@@ -50,6 +50,8 @@ export interface CustomerInfoOrderItem extends Struct.ComponentSchema {
     name: Schema.Attribute.String;
     price: Schema.Attribute.Decimal;
     productId: Schema.Attribute.Relation<'oneToOne', 'api::product.product'>;
+    promotionCode: Schema.Attribute.String;
+    promotionDiscount: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
   };
 }
 

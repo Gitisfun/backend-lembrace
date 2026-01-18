@@ -10,22 +10,24 @@ export default {
   async afterCreate(event) {
     const { result } = event;
 
-    // Only decrease stock when the order is published (prevents double execution with draftAndPublish)
+    // Only process when the order is published (prevents double execution with draftAndPublish)
     if (!result.publishedAt) return;
 
-    await strapi.db.transaction(async ({ trx }) => {
-      // Fetch the full order with populated items
-      const order = await strapi.documents('api::order.order').findOne({
-        documentId: result.documentId,
-        populate: {
-          items: {
-            populate: ['productId'],
-          },
+    // Fetch the full order with populated items and customer info
+    const order = await strapi.documents('api::order.order').findOne({
+      documentId: result.documentId,
+      populate: {
+        items: {
+          populate: ['productId'],
         },
-      });
+        customerInfo: true,
+      },
+    });
 
-      if (!order?.items?.length) return;
+    if (!order?.items?.length) return;
 
+    // Decrease stock in a transaction
+    await strapi.db.transaction(async ({ trx }) => {
       for (const item of order.items) {
         const product = item.productId;
         if (!product?.documentId) continue;
@@ -36,6 +38,36 @@ export default {
         await strapi.db.connection('products').where('document_id', product.documentId).decrement('amount', quantityOrdered).transacting(trx);
       }
     });
+
+    // Create promotion code usage records for items with promotion codes
+    const promotionCodesUsed = new Set<string>();
+    
+    for (const item of order.items) {
+      if (item.promotionCode && item.promotionCode !== '0' && !promotionCodesUsed.has(item.promotionCode)) {
+        promotionCodesUsed.add(item.promotionCode);
+
+        try {
+          // Find the promotion code by code string
+          const promotionCodes = await strapi.documents('api::promotion-code.promotion-code').findMany({
+            filters: { code: { $eqi: item.promotionCode } },
+          });
+
+          if (promotionCodes && promotionCodes.length > 0) {
+            // Create the usage record
+            await strapi.documents('api::promotion-code-usage.promotion-code-usage').create({
+              data: {
+                promotionCode: promotionCodes[0].documentId,
+                customerId: order.customerInfo?.email || '',
+                order: order.documentId,
+                usedAt: new Date().toISOString(),
+              },
+            });
+          }
+        } catch (error) {
+          strapi.log.error('Error creating promotion code usage record:', error);
+        }
+      }
+    }
   },
 
   async beforeUpdate(event) {

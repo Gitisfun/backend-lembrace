@@ -31,6 +31,13 @@
     "materialName": {
       "type": "string",
       "default": "-"
+    },
+    "promotionDiscount": {
+      "type": "decimal",
+      "default": 0
+    },
+    "promotionCode": {
+      "type": "string"
     }
   }
 }
